@@ -1,61 +1,66 @@
-import { Heading, Stack, Text } from "@chakra-ui/react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Heading, Stack, Text } from '@chakra-ui/react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 type Item = {
-  label: string;
-  href: string;
-  subItems?: Omit<Item, "subItems">[];
-};
+  label: string
+  href: string
+  subItems?: Omit<Item, 'subItems'>[]
+}
 
 type Props = {
-  title: string;
-  items: Item[];
-};
+  title: string
+  items: Item[]
+}
 
 const Sidebar = ({ title, items }: Props) => {
-  const pathname = usePathname();
-
   return (
     <Stack w="280px" h="calc(100vh - 80px)" bg="gray.50" p="36px">
       <Text fontSize="14px" fontWeight="700" mb="36px" color="black">
         {title}
       </Text>
       <Stack spacing="25px">
-        {items.map((item) => {
-          const isActive =
-            item.href === pathname ||
-            item.subItems?.some((subItem) => subItem.href === pathname);
-
-          return (
-            <Stack key={item.label} spacing="12px">
-              <Link href={item.href}>
-                <Heading size="sm" color={isActive ? "black" : "gray.500"}>
-                  {item.label}
-                </Heading>
-              </Link>
-              {item.subItems?.map((subItem) => {
-                const isActive = subItem.href === pathname;
-
-                return (
-                  <Link href={subItem.href} key={subItem.label}>
-                    <Text
-                      ml="32px"
-                      color={isActive ? "black" : "gray.500"}
-                      bg={isActive ? "gray.100" : "transparent"}
-                      p="4px 8px"
-                    >
-                      {subItem.label}
-                    </Text>
-                  </Link>
-                );
-              })}
-            </Stack>
-          );
-        })}
+        {items.map((item) => (
+          <SideItem key={item.label} {...item} />
+        ))}
       </Stack>
     </Stack>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
+
+const SideItem = ({ label, href, subItems }: Item) => {
+  const pathname = usePathname()
+
+  const isActive = href === pathname || subItems?.some((subItem) => subItem.href === pathname)
+
+  return (
+    <Stack spacing="12px">
+      <Link href={href}>
+        <Heading size="sm" color={isActive ? 'black' : 'gray.500'}>
+          {label}
+        </Heading>
+      </Link>
+      {subItems?.map((subItem) => <SideSubItem key={subItem.label} {...subItem} />)}
+    </Stack>
+  )
+}
+
+const SideSubItem = ({ label, href }: Item) => {
+  const pathname = usePathname()
+  const isActive = href === pathname
+
+  return (
+    <Link href={href}>
+      <Text
+        ml="32px"
+        color={isActive ? 'black' : 'gray.500'}
+        bg={isActive ? 'gray.100' : 'transparent'}
+        p="4px 8px"
+      >
+        {label}
+      </Text>
+    </Link>
+  )
+}
