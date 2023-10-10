@@ -2,26 +2,22 @@ import { Box, Flex } from "@chakra-ui/react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import type { PropsWithChildren } from "react";
+import { usePathname } from "next/navigation";
+import { sidebarList } from "@/constants/sidebar";
 
 const Layout = ({ children }: PropsWithChildren) => {
+  const pathname = usePathname();
+  const currentPath = `/${pathname.split("/")[1]}`;
+
+  const sidebarProps = sidebarList.find(({ items }) =>
+    items[0].href.startsWith(currentPath),
+  );
+
   return (
     <>
-      <Header />
+      <Header currentPath={currentPath} />
       <Flex pt="80px" h="100vh">
-        <Sidebar
-          title="회원 관리"
-          items={[
-            { label: "회원가입", href: "/auth/register" },
-            {
-              label: "로그인",
-              href: "/auth/login",
-              subItems: [
-                { label: "로그인", href: "/auth/login" },
-                { label: "로그아웃", href: "/auth/logout" },
-              ],
-            },
-          ]}
-        />
+        {sidebarProps && <Sidebar {...sidebarProps} />}
         <Box as="main" flex="1" p="36px">
           {children}
         </Box>

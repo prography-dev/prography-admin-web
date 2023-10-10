@@ -1,30 +1,30 @@
 import { Center, HStack, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-const paths = [
+const pathList = [
   {
     href: "/auth",
     label: "계정",
   },
   {
-    href: "/members",
+    href: "/member",
     label: "멤버",
   },
   {
-    href: "/sessions",
+    href: "/session",
     label: "세션",
   },
   {
     href: "/recruit",
     label: "모집",
   },
-];
+] as const;
 
-const Header = () => {
-  const pathname = usePathname();
-  const currentPath = `/${pathname.split("/")[1]}`;
+type Props = {
+  currentPath: string;
+};
 
+const Header = ({ currentPath }: Props) => {
   return (
     <Center
       position="fixed"
@@ -36,7 +36,7 @@ const Header = () => {
       bg="gray.900"
     >
       <HStack spacing="30px">
-        {paths.map((path) => (
+        {pathList.map((path) => (
           <Link key={path.href} href={path.href}>
             <Center>
               <Text
