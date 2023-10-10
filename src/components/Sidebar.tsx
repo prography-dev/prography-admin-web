@@ -17,7 +17,7 @@ const Sidebar = ({ title, items }: Props) => {
   const pathname = usePathname();
 
   return (
-    <Stack w="280px" h="calc(100vh - 80px)" bg="gray.50" float="left" p="36px">
+    <Stack w="280px" h="calc(100vh - 80px)" bg="gray.50" p="36px">
       <Text fontSize="14px" fontWeight="700" mb="36px" color="black">
         {title}
       </Text>

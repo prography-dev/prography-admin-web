@@ -1,5 +1,5 @@
-import Header from "@/components/Header";
-import { Box, ChakraProvider, extendTheme } from "@chakra-ui/react";
+import Layout from "@/components/Layout";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 
 const theme = extendTheme({
@@ -16,10 +16,9 @@ const theme = extendTheme({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
-      <Header />
-      <Box as="main" pt="80px" h="100vh">
+      <Layout>
         <Component {...pageProps} />
-      </Box>
+      </Layout>
     </ChakraProvider>
   );
 }
