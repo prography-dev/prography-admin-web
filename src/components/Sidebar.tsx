@@ -43,6 +43,7 @@ const Sidebar = ({ title, items }: Props) => {
                       ml="32px"
                       color={isActive ? "black" : "gray.500"}
                       bg={isActive ? "gray.100" : "transparent"}
+                      p="4px 8px"
                     >
                       {subItem.label}
                     </Text>
