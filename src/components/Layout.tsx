@@ -15,15 +15,15 @@ const Layout = ({ children }: PropsWithChildren) => {
   }
 
   return (
-    <>
+    <Box h="100vh">
       <Header currentPath={sidebarProps.href} />
-      <Flex pt="80px" h="100vh">
+      <Flex h="calc(100vh - 80px)">
         {sidebarProps && <Sidebar {...sidebarProps} />}
-        <Box as="main" flex="1" p="36px">
+        <Box as="main" flex="1" p="36px" overflowY="scroll">
           {children}
         </Box>
       </Flex>
-    </>
+    </Box>
   )
 }
 

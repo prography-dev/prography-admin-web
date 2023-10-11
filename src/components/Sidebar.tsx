@@ -15,7 +15,7 @@ type Props = {
 
 const Sidebar = ({ title, items }: Props) => {
   return (
-    <Stack w="280px" h="calc(100vh - 80px)" bg="gray.50" p="36px">
+    <Stack w="280px" h="100%" bg="gray.50" p="36px" overflowY="scroll">
       <Text fontSize="14px" fontWeight="700" mb="36px" color="black">
         {title}
       </Text>
