@@ -8,15 +8,15 @@ const pathList = [
   },
   {
     href: '/member',
-    label: '멤버',
+    label: '회원',
   },
   {
     href: '/session',
-    label: '세션',
+    label: '세션/마일스톤',
   },
   {
     href: '/recruit',
-    label: '모집',
+    label: '리크루팅',
   },
 ] as const
 
